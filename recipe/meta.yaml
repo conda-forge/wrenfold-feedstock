@@ -1,4 +1,4 @@
-{% set version = "0.1.0" %}
+{% set version = "0.1.1" %}
 
 package:
   name: wrenfold
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/wrenfold/wrenfold/releases/download/v{{ version }}/wrenfold-source-v{{ version }}.tar.gz
-  sha256: c621dff6173822e165c112ea9ff491ecb3a5f16b01aedd890614fb1811e05a5a
+  sha256: 23c6a537136bd4d92a58ad55aca82285d11b1d2b8965e3e815ad421efc023358
 
 build:
   number: 0
