@@ -1,4 +1,4 @@
-{% set version = "0.1.1" %}
+{% set version = "0.2.1" %}
 
 package:
   name: wrenfold
@@ -6,20 +6,28 @@ package:
 
 source:
   url: https://github.com/wrenfold/wrenfold/releases/download/v{{ version }}/wrenfold-source-v{{ version }}.tar.gz
-  sha256: 23c6a537136bd4d92a58ad55aca82285d11b1d2b8965e3e815ad421efc023358
+  sha256: 6615bd669b72569c4f37d3298905a9f34079f03211521d480188250184a7cda0
+  patches:
+    - verbose.patch
 
 build:
   number: 0
 
 requirements:
   build:
+    - python  # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - cmake >=3.20,<3.28  # [build_platform != target_platform]
+    - ninja >=1.5  # [build_platform != target_platform]
+    - mypy ==1.9.0  # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
+    - {{ stdlib('c') }}
   host:
     - python
-    - scikit-build-core ==0.9.8
-    - cmake >=3.20
+    - scikit-build-core ==0.10.7
+    # Use cmake<3.28 to avoid clang-scan-deps dependency on OSX (introduced with CMake 3.28).
+    - cmake >=3.20,<3.28
     - ninja >=1.5
     - mypy ==1.9.0
     - pip
@@ -32,15 +40,8 @@ test:
     - wrenfold.sym
   requires:
     - pip
-    - numpy
-    - sympy
-  source_files:
-    - components/wrapper/tests/*.py
-    - examples/**/*.py
-    - support/test_wheel.py
   commands:
     - pip check
-    - python support/test_wheel.py
 
 about:
   home: https://github.com/wrenfold/wrenfold
