@@ -1,4 +1,4 @@
-{% set version = "0.2.1" %}
+{% set version = "0.2.2" %}
 
 package:
   name: wrenfold
@@ -6,9 +6,7 @@ package:
 
 source:
   url: https://github.com/wrenfold/wrenfold/releases/download/v{{ version }}/wrenfold-source-v{{ version }}.tar.gz
-  sha256: 6615bd669b72569c4f37d3298905a9f34079f03211521d480188250184a7cda0
-  patches:
-    - verbose.patch
+  sha256: 3b15ce8fec88b7c16ca0f4daeadc2e3377051b80179d16d545bb2657e1516f57
 
 build:
   number: 0
@@ -18,8 +16,7 @@ requirements:
     - python  # [build_platform != target_platform]
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - cmake >=3.20,<3.28  # [build_platform != target_platform]
-    - ninja >=1.5  # [build_platform != target_platform]
-    - mypy ==1.9.0  # [build_platform != target_platform]
+    - ninja  # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
@@ -28,8 +25,7 @@ requirements:
     - scikit-build-core ==0.10.7
     # Use cmake<3.28 to avoid clang-scan-deps dependency on OSX (introduced with CMake 3.28).
     - cmake >=3.20,<3.28
-    - ninja >=1.5
-    - mypy ==1.9.0
+    - ninja
     - pip
   run:
     - python
