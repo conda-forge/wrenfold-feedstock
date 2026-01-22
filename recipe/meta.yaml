@@ -1,4 +1,4 @@
-{% set version = "0.4.1" %}
+{% set version = "0.5.1" %}
 
 package:
   name: wrenfold
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/wrenfold/wrenfold/releases/download/v{{ version }}/wrenfold-source-v{{ version }}.tar.gz
-  sha256: 2d217c8fbb339d574589c75db904bcb098a0109fea324475851ff37adf9e12b2
+  sha256: 1b776e1d199ba7dfe6e33fcb5d2f4d3184d7df9cddba5eb2352aba8677ccccfb
 
 build:
   number: 0
@@ -22,7 +22,7 @@ requirements:
     - {{ stdlib('c') }}
   host:
     - python
-    - scikit-build-core ==0.10.7
+    - scikit-build-core ==0.11.6
     # Use cmake<3.28 to avoid clang-scan-deps dependency on OSX (introduced with CMake 3.28).
     - cmake >=3.20,<3.28
     - ninja
@@ -46,8 +46,9 @@ about:
   license_file:
     - LICENSE
     - dependencies/abseil-cpp/LICENSE
+    - dependencies/eigen/LICENSE
     - dependencies/fmt/LICENSE
-    - dependencies/pybind11/LICENSE
+    - dependencies/nanobind/LICENSE
   doc_url: https://wrenfold.org
 
 extra:
